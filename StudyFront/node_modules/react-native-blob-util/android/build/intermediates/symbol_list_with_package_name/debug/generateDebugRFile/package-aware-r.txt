@@ -1,3 +1,0 @@
-com.ReactNativeBlobUtil
-string app_name
-xml provider_paths
