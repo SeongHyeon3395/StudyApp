@@ -1,5 +1,30 @@
 {
+  "name": "studyapp-backend",
+  "version": "1.0.0",
+  "description": "StudyApp Backend API Server",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "build": "echo 'No build step required'",
+    "docker:build": "docker build -t studyapp-backend .",
+    "docker:run": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f backend"
+  },
   "dependencies": {
-    "dotenv": "^17.2.2"
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "pg": "^8.11.3",
+    "node-fetch": "^3.3.2",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

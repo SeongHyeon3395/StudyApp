@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 데이터베이스
+  postgres:
+    image: postgres:15-alpine
+    container_name: studyapp-db
+    environment:
+      POSTGRES_DB: StudyAppDB
+      POSTGRES_USER: StudyApp
+      POSTGRES_PASSWORD: Sh52315231!?
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    networks:
+      - studyapp-network
+
+  # 백엔드 API 서버
+  backend:
+    build: .
+    container_name: studyapp-backend
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=StudyApp
+      - DB_PASSWORD=Sh52315231!?
+      - DB_NAME=StudyAppDB
+      - GEMINI_API_KEY=AIzaSyBiOhjkoTzUzGa48iEbryJoN1WkOaSbl2o
+      - SOLAPI_API_KEY=NCS6ZYXLVGSONROK
+      - SOLAPI_SECRET_KEY=ODY5WNFMWKB5YQFOTTMLVN9D7EADYQHU
+      - SOLAPI_SENDER_NUMBER=01083833395
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - studyapp-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  studyapp-network:
+    driver: bridge
