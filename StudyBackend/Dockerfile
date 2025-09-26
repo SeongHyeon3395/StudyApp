@@ -4,11 +4,11 @@ FROM node:18-alpine
 # 작업 디렉터리 설정
 WORKDIR /app
 
-# package.json과 package-lock.json 복사
+# package.json과 (있다면) package-lock.json만 먼저 복사
 COPY package*.json ./
 
-# 종속성 설치
-RUN npm ci --only=production
+# 종속성 설치 (lockfile이 있으면 ci, 없으면 install)
+RUN npm ci --omit=dev || npm install --only=production
 
 # 애플리케이션 소스 복사
 COPY . .
