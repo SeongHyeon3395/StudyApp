@@ -24,7 +24,18 @@ cd StudyApp/StudyBackend
 npm install
 ```
 
-## 4. Docker로 배포
+## 4. 환경 변수 설정 (.env)
+백엔드 폴더에 `.env` 파일을 생성하고 아래 예시를 참고해 값을 채웁니다. 절대 깃에 올리지 마세요.
+
+```bash
+cd StudyApp/StudyBackend
+cp .env.example .env
+vi .env  # 또는 원하는 편집기 사용
+```
+
+필수 키들: POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, DB_* 동일하게 맞추기, GEMINI_API_KEY, SOLAPI_API_KEY, SOLAPI_SECRET_KEY, SOLAPI_SENDER_NUMBER
+
+## 5. Docker로 배포
 ```bash
 # 배포 스크립트 실행 권한 부여
 chmod +x deploy.sh
